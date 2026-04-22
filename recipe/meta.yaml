@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: e9627817b6ab706b183ccd589a2faaca018f139862f61664b87a70f4028fcc34
 
 build:
-  number: 0
+  number: 1
   entry_points:
     - qarrayrun = qarrayrun.cli:main
   noarch: python
@@ -19,10 +19,10 @@ build:
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
     - pytest-runner
   run:
-    - python
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -31,6 +31,7 @@ test:
     - qarrayrun --help
   requires:
     - pytest
+    - python {{ python_min }}
 
 about:
   home: https://github.com/CFSAN-Biostatistics/qarrayrun
